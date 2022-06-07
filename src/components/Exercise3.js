@@ -20,7 +20,7 @@ export default function Exercise3() {
 			})
 			.then(data => {
 				setData({
-					data: JSON.stringify(data, null, 4),
+					data: JSON.stringify(data.data, null, 4),
 					error: null,
 				});
 			})
@@ -47,7 +47,7 @@ export default function Exercise3() {
 				Post new data to API under api/users
 			</button>
 			{error && <div>An error occured: {error}</div>}
-			<pre>{data.data}</pre>
+			<pre>{data}</pre>
 		</>
 	);
 }

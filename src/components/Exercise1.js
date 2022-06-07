@@ -14,7 +14,7 @@ export default function Exercise1() {
 			})
 			.then(data => {
 				setData({
-					data: JSON.stringify(data, null, 4),
+					data: JSON.stringify(data.data, null, 4),
 					error: null,
 				});
 			})
@@ -37,7 +37,7 @@ export default function Exercise1() {
 				Load example Data from api/users
 			</button>
 			{error && <div>An error occured: {error}</div>}
-			<pre>{data.data}</pre>
+			<pre>{data}</pre>
 		</>
 	);
 }
