@@ -1,11 +1,7 @@
 import {useState} from 'react';
 
 export default function Exercise4() {
-	const [data4, setData4] = useState('...loading');
-	const [error, setError] = useState({
-		error: false,
-		message: '',
-	});
+	const [{data, error}, setData] = useState({data: '', error: null});
 
 	async function fetchExercise4(id) {
 		fetch(`/api/users/${id}`, {
@@ -19,18 +15,16 @@ export default function Exercise4() {
 				}
 			})
 			.then(data => {
-				setData4(JSON.stringify(data, null, 4));
-				setError({
-					error: false,
-					message: '',
+				setData({
+					data: JSON.stringify(data, null, 4),
+					error: null,
 				});
 			})
 			.catch(error => {
-				setError({
-					error: true,
-					message: error.message,
+				setData({
+					data: '',
+					error: error.message,
 				});
-				setData4();
 			});
 	}
 
@@ -44,8 +38,8 @@ export default function Exercise4() {
 			>
 				Delete user via API
 			</button>
-			{error.error && <div>An error occured: {error.message}</div>}
-			<pre>{data4}</pre>
+			{error && <div>An error occured: {error}</div>}
+			<pre>{data.data}</pre>
 		</>
 	);
 }

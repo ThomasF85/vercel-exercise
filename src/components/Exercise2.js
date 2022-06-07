@@ -1,11 +1,7 @@
 import {useState} from 'react';
 
 export default function Exercise2() {
-	const [data2, setData2] = useState('...loading');
-	const [error, setError] = useState({
-		error: false,
-		message: '',
-	});
+	const [{data, error}, setData] = useState({data: '', error: null});
 
 	function fetchExercise2(id) {
 		fetch(`/api/users/${id}`)
@@ -17,18 +13,16 @@ export default function Exercise2() {
 				}
 			})
 			.then(data => {
-				setData2(JSON.stringify(data, null, 4));
-				setError({
-					error: false,
-					message: '',
+				setData({
+					data: JSON.stringify(data, null, 4),
+					error: null,
 				});
 			})
 			.catch(error => {
-				setError({
-					error: true,
-					message: error.message,
+				setData({
+					data: '',
+					error: error.message,
 				});
-				setData2();
 			});
 	}
 
@@ -42,8 +36,8 @@ export default function Exercise2() {
 			>
 				Load example Data from api/users/[id]
 			</button>
-			{error.error && <div>An error occured: {error.message}</div>}
-			<pre>{data2}</pre>
+			{error && <div>An error occured: {error}</div>}
+			<pre>{data.data}</pre>
 		</>
 	);
 }
